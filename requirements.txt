@@ -1,0 +1,19 @@
+# Local development / testing
+torch>=2.3.0
+torchvision
+diffusers>=0.29.0
+transformers>=4.40.0
+accelerate>=0.30.0
+insightface>=0.7.3
+onnxruntime       # Mac (Apple Silicon / Intel) — Modal container uses onnxruntime-gpu instead
+git+https://github.com/tencent-ailab/IP-Adapter.git
+huggingface_hub
+safetensors
+Pillow
+numpy
+
+# Deployment
+modal>=0.63.0
+
+# Client
+requests

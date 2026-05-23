@@ -1,0 +1,28 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv/
+venv/
+
+# Model weights (large binary files — store in Modal volume or HuggingFace cache)
+*.bin
+*.pkl
+*.pt
+*.safetensors
+*.onnx
+*.dat
+pretrained_models/
+models/
+
+# Output images
+output/
+*.png
+*.jpg
+!sample_output.png   # keep one example if you want
+
+# Notebooks (use .py files instead)
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
