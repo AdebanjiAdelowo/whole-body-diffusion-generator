@@ -2,7 +2,10 @@
 
 Face-guided full-body portrait generation using **IP-Adapter FaceID** + **SDXL**, served via **Modal** serverless GPU.
 
-This is a modernised replacement for [Whole-body-GAN-generator](../Whole-body-GAN-generator), built in 2022 with StyleGAN-Human + ReStyle + InsetGAN.
+This project supersedes an earlier GAN-based approach to the same task
+([Whole-body-GAN-generator](https://github.com/AdebanjiAdelowo/Whole-body-GAN-generator),
+built in 2022 with StyleGAN-Human, ReStyle, and InsetGAN), replacing it with
+a single-pass diffusion pipeline.
 
 ---
 
@@ -79,7 +82,7 @@ Modal prints a URL like `https://your-username--whole-body-generator-generator-g
 Copy it into `example_client.py` as `ENDPOINT_URL`.
 
 The first deploy downloads SDXL and the IP-Adapter checkpoint (~7 GB total) into the Modal
-volume — this happens once and is cached. Subsequent cold starts load from the volume.
+volume: this happens once and is cached. Subsequent cold starts load from the volume.
 
 ---
 
@@ -168,8 +171,8 @@ All weights are downloaded automatically on first deploy into the Modal persiste
 
 ## References
 
-- [IP-Adapter](https://github.com/tencent-ailab/IP-Adapter) — Ye et al. (2023)
-- [IP-Adapter FaceID](https://ip-adapter.github.io/FaceID/) — improved identity preservation
+- [IP-Adapter](https://github.com/tencent-ailab/IP-Adapter) (Ye et al., 2023)
+- [IP-Adapter FaceID](https://ip-adapter.github.io/FaceID/): improved identity preservation
 - [Stable Diffusion XL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)
 - [insightface](https://github.com/deepinsight/insightface)
 - [Modal](https://modal.com/docs)
