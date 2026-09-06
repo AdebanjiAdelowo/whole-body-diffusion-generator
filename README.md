@@ -18,7 +18,13 @@ a single-pass diffusion pipeline.
 | **Inference time** | ~3–5 min (InsetGAN optimisation loop) | ~15–25 sec (30 DDIM steps) |
 | **Serving** | Colab notebook + ngrok tunnel + Firebase Storage relay | Modal serverless GPU endpoint (stable HTTPS URL) |
 | **iOS integration** | Upload to Firebase → poll for result | Direct `multipart/form-data` POST, PNG response |
-| **Identity fidelity** | Good (limited by GAN latent space) | Better (ArcFace embedding conditions the UNet directly) |
+| **Identity fidelity** | Constrained by GAN latent-space inversion | Direct ArcFace-embedding conditioning of the UNet |
+
+Inference times are typical figures for each stack on the stated hardware, not a controlled
+side-by-side benchmark. Identity fidelity is not measured quantitatively in this repository
+(no ArcFace similarity score or user study); the expectation that direct embedding conditioning
+preserves identity better than GAN inversion follows from the IP-Adapter FaceID and InsetGAN
+papers rather than from a comparison run here.
 
 ---
 
@@ -134,9 +140,11 @@ URLSession.shared.dataTask(with: request) { data, _, _ in
 |---|---|---|---|
 | `face_image` | file | yes | JPEG or PNG containing a face |
 | `prompt` | string | no | Generation prompt (default: full body portrait…) |
-| `negative_prompt` | string | no | What to avoid in the output |
 | `seed` | integer | no | Fixed seed for reproducibility |
-| `num_steps` | integer | no | DDIM steps (default: 30, range: 10–50) |
+| `num_steps` | integer | no | DDIM steps (default: 30) |
+
+`negative_prompt` is defined as a parameter of `generate()` in `pipeline.py` (with a fixed
+default) but is not currently exposed as a form field by the Modal endpoint in `app.py`.
 
 Returns: `image/png`, 768 × 1024 px
 

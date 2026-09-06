@@ -19,7 +19,7 @@ This opens a browser, you click "Approve", done.
 
 **Step 3: Go to the project folder**
 ```bash
-cd /Users/adebanjiadelowo/Documents/GitHub/whole-body-diffusion-generator
+cd path/to/whole-body-diffusion-generator
 ```
 
 **Step 4: Deploy**
@@ -54,7 +54,7 @@ Do the same for `WholBodyGeneratorApp.swift`.
 
 In Finder, go to:
 ```
-/Users/adebanjiadelowo/Documents/GitHub/whole-body-diffusion-generator/ios/WholBodyGenerator/
+path/to/whole-body-diffusion-generator/ios/WholBodyGenerator/
 ```
 Select all 4 `.swift` files → drag them into Xcode's left panel onto the project folder → tick **"Copy items if needed"** → Add.
 

@@ -1,8 +1,8 @@
-# iOS App — Whole Body Generator
+# iOS App: Whole Body Generator
 
 SwiftUI app: pick a face photo → tap Generate → see the full-body portrait.
 
-Calls the Modal endpoint directly over HTTPS — no Firebase, no polling.
+Calls the Modal endpoint directly over HTTPS: no Firebase, no polling.
 
 ---
 
