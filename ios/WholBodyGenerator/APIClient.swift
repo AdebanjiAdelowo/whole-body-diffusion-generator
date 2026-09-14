@@ -87,3 +87,4 @@ private extension Data {
         if let data = string.data(using: .utf8) { append(data) }
     }
 }
+

@@ -26,3 +26,8 @@ output/
 
 # macOS
 .DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
