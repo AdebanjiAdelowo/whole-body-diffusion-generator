@@ -20,7 +20,19 @@ enum APIError: LocalizedError {
 final class APIClient {
     static let shared = APIClient()
 
-    private let endpointURL = "https://adelowooluwatimileyin--whole-body-generator-generator-generate.modal.run"
+    /// Your deployed Modal endpoint. `modal deploy app.py` prints this URL
+    /// (see ../../steps.md or ../README.md). Either:
+    ///   1. Replace the placeholder below directly (do not commit your real
+    ///      URL to a public fork/repo), or
+    ///   2. Set the `MODAL_ENDPOINT_URL` environment variable in your Xcode
+    ///      scheme (Product → Scheme → Edit Scheme → Run → Arguments →
+    ///      Environment Variables) to avoid editing this file at all.
+    private let endpointURL: String = {
+        if let override = ProcessInfo.processInfo.environment["MODAL_ENDPOINT_URL"], !override.isEmpty {
+            return override
+        }
+        return "https://your-modal-endpoint.modal.run/generate"
+    }()
 
     func generateFullBody(
         faceImage: UIImage,

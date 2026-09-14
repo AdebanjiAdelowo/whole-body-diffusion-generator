@@ -18,13 +18,18 @@ a single-pass diffusion pipeline.
 | **Inference time** | ~3–5 min (InsetGAN optimisation loop) | ~15–25 sec (30 DDIM steps) |
 | **Serving** | Colab notebook + ngrok tunnel + Firebase Storage relay | Modal serverless GPU endpoint (stable HTTPS URL) |
 | **iOS integration** | Upload to Firebase → poll for result | Direct `multipart/form-data` POST, PNG response |
-| **Identity fidelity** | Constrained by GAN latent-space inversion | Direct ArcFace-embedding conditioning of the UNet |
 
 Inference times are typical figures for each stack on the stated hardware, not a controlled
-side-by-side benchmark. Identity fidelity is not measured quantitatively in this repository
-(no ArcFace similarity score or user study); the expectation that direct embedding conditioning
-preserves identity better than GAN inversion follows from the IP-Adapter FaceID and InsetGAN
-papers rather than from a comparison run here.
+side-by-side benchmark.
+
+Identity preservation also changed architecturally: the old pipeline inverted the face into a
+GAN latent space (dlib alignment, then iterative ReStyle pSp refinement) before generation; the
+new pipeline conditions the SDXL UNet directly on an ArcFace face embedding via IP-Adapter
+FaceID, in a single forward pass. That is a description of the two approaches, not a measured
+result: identity fidelity is not evaluated quantitatively anywhere in this repository (no
+ArcFace similarity score, no user study, no saved comparison image). The expectation that direct
+embedding conditioning preserves identity better than GAN inversion follows from the IP-Adapter
+FaceID and InsetGAN papers, not from a comparison run here.
 
 ---
 
