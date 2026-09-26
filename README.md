@@ -54,6 +54,25 @@ Full-body portrait PNG
 Modal web endpoint  ──►  stable HTTPS URL, called directly from iOS
 ```
 
+Request flow at deployment time (`app.py`). Model loading happens once per container, not per
+request:
+
+```mermaid
+sequenceDiagram
+    participant C as Client (iOS app, example_client.py or curl)
+    participant E as Modal web endpoint (FastAPI, POST /generate)
+    participant G as GPU container (A10G)
+    participant V as Modal volume "whole-body-models"
+    Note over G,V: on container start (@modal.enter):<br/>load SDXL, IP-Adapter FaceID, insightface buffalo_l<br/>(weights downloaded to the volume on first deploy)
+    C->>E: multipart/form-data: face_image, prompt, seed, num_steps
+    E->>G: generate(...)
+    G->>G: ArcFace embedding of the face
+    G->>G: SDXL + IP-Adapter FaceID, DDIM, 768 × 1024
+    G-->>E: PNG bytes
+    E-->>C: image/png
+    Note over G: container scales down after 120 s idle,<br/>up to 4 concurrent inputs per container
+```
+
 ---
 
 ## Project layout
